@@ -170,7 +170,7 @@
 class Receiver {
 public:
     Receiver();
-    void begin(unsigned long freq=RX_FREQUENCY(DEFAULT_BAUD_RATE));
+    void begin(float freq=RX_FREQUENCY(DEFAULT_BAUD_RATE));
     boolean hasMessage();
     const byte *getMessage();
     void resume();
@@ -196,7 +196,7 @@ Receiver SerialReceiver;
 class Transmitter {
 public:
     Transmitter();
-    void begin(unsigned long freq=TX_FREQUENCY(DEFAULT_BAUD_RATE));
+    void begin(float freq=TX_FREQUENCY(DEFAULT_BAUD_RATE));
     boolean isAvailable();
     void sendMessage(const byte *buffer, int size=CSTRING_SIZE);
 
@@ -255,7 +255,7 @@ Receiver::Receiver() {
     msg_size = SIZE_NOT_DEFINED;
 }
 
-void Receiver::begin(unsigned long freq=RX_FREQUENCY(DEFAULT_BAUD_RATE)) {
+void Receiver::begin(float freq=RX_FREQUENCY(DEFAULT_BAUD_RATE)) {
     ITIMER_RX.init(); 
 
     if(ITIMER_RX.attachInterrupt(freq, receiverHandler)) {
@@ -323,7 +323,7 @@ Transmitter::Transmitter() {
     msg_size = SIZE_NOT_DEFINED;
 }
 
-void Transmitter::begin(unsigned long freq=TX_FREQUENCY(DEFAULT_BAUD_RATE)) {
+void Transmitter::begin(float freq=TX_FREQUENCY(DEFAULT_BAUD_RATE)) {
     ITIMER_TX.init(); 
 
     if(ITIMER_TX.attachInterrupt(freq, transmitterHandler)) {
